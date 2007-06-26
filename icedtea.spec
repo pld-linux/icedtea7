@@ -1,5 +1,7 @@
 # TODO:
 # - fix bash substitution
+%bcond_without	bootstrap
+#
 %define	snap	20070626
 Summary:	OpenJDK and GNU Classpath code
 Name:		icedtea
@@ -15,7 +17,10 @@ URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	bash
 BuildRequires:	cups-devel
 BuildRequires:	eclipse-ecj
+BuildRequires:	findutils
+BuildRequires:	jdk
 BuildRequires:	libgcj
+BuildRequires:	libstdc++-devel
 BuildRequires:	motif-devel
 BuildRequires:	unzip
 BuildRequires:	xalan-j
@@ -35,18 +40,22 @@ Classpath project.
 %prep
 %setup -q -n %{name} -a1
 
+sed -i -e 's#-Werror##g' openjdk/hotspot/build/linux/makefiles/gcc.make openjdk/j2se/make/common/*.gmk
+
 %build
 %configure \
 	--with-ecj-jar=%{_javadir}/ecj.jar \
 	--with-libgcj-jar=%{_javadir}/libgcj.jar \
 	--with-xalan2-jar=%{_javadir}/xalan.jar \
-	--with-xalan2-serializer-jar=%{_javadir}/xalan.jar \
+	--with-xalan2-serializer-jar=%{_javadir}/serializer.jar \
 	--with-xerces2-jar=%{_javadir}/xerces.jar \
 	--with-openjdk-src-zip=%{SOURCE1} \
 	--with-openjdk-src=${PWD}/openjdk
 
 %{__make} -j1 \
-	SHELL=/bin/bash
+	%{?with_bootstrap:bootstrap} \
+	SHELL=/bin/bash \
+	BOOTDIR=%{java_home}
 
 %install
 rm -rf $RPM_BUILD_ROOT
