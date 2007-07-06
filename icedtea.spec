@@ -1,9 +1,11 @@
 # TODO:
 # - fix bash substitution
-%bcond_without	bootstrap
+#
+%bcond_without	bootstrap	# don't perform bootstrap build
 #
 %define	snap	20070626
 Summary:	OpenJDK and GNU Classpath code
+SummarY(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea
 Version:	1.0
 Release:	0.%{snap}.1
@@ -33,9 +35,15 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The IcedTea project provides a harness to build the source code from
-http://openjdk.java.net using Free Software build tools and provides
+http://openjdk.java.net/ using Free Software build tools and provides
 replacements libraries for the binary plugs with code from the GNU
 Classpath project.
+
+%description -l pl.UTF-8
+Projekt IcedTea daje możliwość kompilacji kodu źródłowego z
+http://openjdk.java.net/ przy użyciu wolnodostępnych narzędzi oraz
+dostarcza zamienniki biblioteczne binarnych wtyczek pochodzące z
+projektu GNU Classpath.
 
 %prep
 %setup -q -n %{name} -a1
@@ -52,8 +60,7 @@ sed -i -e 's#-Werror##g' openjdk/hotspot/build/linux/makefiles/gcc.make openjdk/
 	--with-openjdk-src-zip=%{SOURCE1} \
 	--with-openjdk-src=${PWD}/openjdk
 
-%{__make} -j1 \
-	%{?with_bootstrap:bootstrap} \
+%{__make} -j1 %{?with_bootstrap:bootstrap} \
 	SHELL=/bin/bash \
 	BOOTDIR=%{java_home}
 
