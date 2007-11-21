@@ -1,6 +1,8 @@
 # TODO:
 # - fix bash substitution
 #
+%bcond_with	java_sun
+#
 %define	snap	20071121
 Summary:	OpenJDK and GNU Classpath code
 SummarY(pl.UTF-8):	Kod OpenJDK i GNU Classpath
@@ -40,6 +42,10 @@ BuildRequires:	xorg-proto-printproto-devel
 BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xulrunner-devel
 BuildRequires:	zlib-devel
+%if %{with java_sun}
+BuildRequires:	java-sun-jre
+BuildRequires:	jpackage-utils
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -57,6 +63,8 @@ projektu GNU Classpath.
 %prep
 %setup -q -n %{name} -a1
 
+find . -name '*.gmk' -exec sed -i -e 's#^PRINTF.*=.*#PRINTF = /bin/printf#g' "{}" ";"
+
 %build
 unset JAVA_HOME || :
 %configure \
@@ -69,6 +77,7 @@ unset JAVA_HOME || :
 	--with-openjdk-src=${PWD}/openjdk
 
 %{__make} -j1 \
+	%{?with_java_sun:BOOTDIR=%{java_home}} \
 	SHELL=/bin/bash
 
 %install
