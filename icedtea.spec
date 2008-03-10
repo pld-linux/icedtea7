@@ -68,6 +68,7 @@ find . -name '*.gmk' -exec sed -i -e 's#^PRINTF.*=.*#PRINTF = /bin/printf#g' "{}
 %build
 unset JAVA_HOME || :
 %configure \
+	--with-gcj-home=%{_prefix} \
 	--with-ecj-jar=%{_javadir}/ecj.jar \
 	--with-libgcj-jar=%{_javadir}/libgcj.jar \
 	--with-xalan2-jar=%{_javadir}/xalan.jar \
