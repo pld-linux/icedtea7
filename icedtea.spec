@@ -61,9 +61,10 @@ dostarcza zamienniki biblioteczne binarnych wtyczek pochodzące z
 projektu GNU Classpath.
 
 %prep
-%setup -q
+# source1 should unpack itself into openjdk dir (it does that by default)
+%setup -q -a1
 
-find . -name '*.gmk' -exec sed -i -e 's#^PRINTF.*=.*#PRINTF = /bin/printf#g' "{}" ";"
+sed -i -e 's#^PRINTF.*=.*#PRINTF = /bin/printf#g' openjdk/jdk/make/common/shared/Defs-utils.gmk
 
 %build
 unset JAVA_HOME || :
