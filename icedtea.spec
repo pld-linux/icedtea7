@@ -3,18 +3,18 @@
 #
 %bcond_with	java_sun
 #
-%define	snap	20071121
 Summary:	OpenJDK and GNU Classpath code
 SummarY(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea
-Version:	1.0
-Release:	0.%{snap}.1
+Version:	1.6
+Release:	0.1
 License:	GPL
 Group:		Development/Languages/Java
-Source0:	%{name}-%{snap}.tar.bz2
-# Source0-md5:	37b772fd0c9e0c2779d6fb59ec2a2cfc
-Source1:	http://download.java.net/openjdk/jdk7/promoted/b23/openjdk-7-ea-src-b23-30_oct_2007.zip
-# Source1-md5:	7eed137c0321e0b5b75ff2d646ce0d0d
+Source0:	http://icedtea.classpath.org/download/source/%{name}-%{version}.tar.gz
+# Source0-md5:	99343f82b3a642a3be3e96816608ae23
+# Create this one by running make openjdk-dist (needs mercurial + mercurial forest extension)
+Source1:	openjdk-b24.zip
+# Source1-md5:	339618d385930f6dc07a7524541cae54
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	bash
@@ -61,7 +61,7 @@ dostarcza zamienniki biblioteczne binarnych wtyczek pochodzące z
 projektu GNU Classpath.
 
 %prep
-%setup -q -n %{name} -a1
+%setup -q
 
 find . -name '*.gmk' -exec sed -i -e 's#^PRINTF.*=.*#PRINTF = /bin/printf#g' "{}" ";"
 
