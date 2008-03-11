@@ -75,7 +75,6 @@ unset JAVA_HOME || :
 	--with-xalan2-jar=%{_javadir}/xalan.jar \
 	--with-xalan2-serializer-jar=%{_javadir}/serializer.jar \
 	--with-xerces2-jar=%{_javadir}/xerces.jar \
-	--with-openjdk-src-zip=%{SOURCE1} \
 	--with-openjdk-src=${PWD}/openjdk
 
 %{__make} -j1 \
