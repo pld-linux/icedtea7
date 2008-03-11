@@ -1,8 +1,6 @@
 # TODO:
 # - fix bash substitution
 #
-%bcond_with	java_sun
-#
 Summary:	OpenJDK and GNU Classpath code
 SummarY(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea
@@ -21,7 +19,7 @@ BuildRequires:	bash
 BuildRequires:	cups-devel
 BuildRequires:	eclipse-ecj
 BuildRequires:	freetype-devel
-BuildRequires:	gcc-java
+BuildRequires:	gcc-java >= 6:4.3
 BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
 BuildRequires:	gtk+2-devel
@@ -42,10 +40,6 @@ BuildRequires:	xorg-proto-printproto-devel
 BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xulrunner-devel
 BuildRequires:	zlib-devel
-%if %{with java_sun}
-BuildRequires:	java-sun-jre
-BuildRequires:	jpackage-utils
-%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -78,7 +72,6 @@ unset JAVA_HOME || :
 	--with-openjdk-src=${PWD}/openjdk
 
 %{__make} -j1 \
-	%{?with_java_sun:BOOTDIR=%{java_home}} \
 	SHELL=/bin/bash
 
 %install
