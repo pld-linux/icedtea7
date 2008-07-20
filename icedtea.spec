@@ -4,25 +4,26 @@
 Summary:	OpenJDK and GNU Classpath code
 SummarY(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea
-Version:	1.6
+Version:	1.7
 Release:	0.1
 License:	GPL
 Group:		Development/Languages/Java
 Source0:	http://icedtea.classpath.org/download/source/%{name}-%{version}.tar.gz
-# Source0-md5:	99343f82b3a642a3be3e96816608ae23
-# Create this one by running make openjdk-dist (needs mercurial + mercurial forest extension)
-Source1:	openjdk-b24.zip
-# Source1-md5:	339618d385930f6dc07a7524541cae54
+# Source0-md5:	0d97865e26528182e01929917166dd26
+# Create this one by running make dist-openjdk (needs mercurial + mercurial forest extension)
+Source1:	openjdk-b26.zip
+# Source1-md5:	7a5d2da503fde6ba09df9773d7df27ca
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	bash
 BuildRequires:	cups-devel
 BuildRequires:	eclipse-ecj
-BuildRequires:	freetype-devel
+BuildRequires:	freetype-devel >= 2.3
 BuildRequires:	gcc-java >= 6:4.3
 BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
 BuildRequires:	gtk+2-devel
+BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	jdk
 BuildRequires:	libgcj
 BuildRequires:	libjpeg-devel
@@ -34,6 +35,7 @@ BuildRequires:	xalan-j
 BuildRequires:	xerces-j
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXinerama-devel
+BuildRequires:	xorg-lib-libXp-devel
 BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xorg-proto-printproto-devel
@@ -66,6 +68,7 @@ sed -i -e 's#^PRINTF.*=.*#PRINTF = /bin/printf#g' \
 unset JAVA_HOME || :
 %configure \
 	--with-gcj-home=%{_prefix} \
+	--with-ecj=%{_bindir}/ecj \
 	--with-ecj-jar=%{_javadir}/ecj.jar \
 	--with-libgcj-jar=%{_javadir}/libgcj.jar \
 	--with-xalan2-jar=%{_javadir}/xalan.jar \
