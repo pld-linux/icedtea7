@@ -17,7 +17,7 @@ URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	bash
 BuildRequires:	cups-devel
-BuildRequires:	eclipse-ecj
+# BuildRequires:	eclipse-ecj
 BuildRequires:	freetype-devel >= 2.3
 BuildRequires:	gcc-java >= 6:4.3
 BuildRequires:	giflib-devel
@@ -29,6 +29,7 @@ BuildRequires:	libgcj
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	mercurial
 BuildRequires:	motif-devel
 BuildRequires:	rhino
 BuildRequires:	unzip
@@ -43,6 +44,7 @@ BuildRequires:	xorg-proto-printproto-devel
 BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xulrunner-devel
 BuildRequires:	zlib-devel
+BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
