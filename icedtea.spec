@@ -4,12 +4,12 @@
 Summary:	OpenJDK and GNU Classpath code
 SummarY(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea
-Version:	1.7
+Version:	1.8
 Release:	0.1
 License:	GPL
 Group:		Development/Languages/Java
 Source0:	http://icedtea.classpath.org/download/source/%{name}-%{version}.tar.gz
-# Source0-md5:	0d97865e26528182e01929917166dd26
+# Source0-md5:	b165d877e0f9824a2b492541be945874
 # Create this one by running make dist-openjdk (needs mercurial + mercurial forest extension)
 Source1:	openjdk-b26.zip
 # Source1-md5:	7a5d2da503fde6ba09df9773d7df27ca
@@ -30,6 +30,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	motif-devel
+BuildRequires:	rhino
 BuildRequires:	unzip
 BuildRequires:	xalan-j
 BuildRequires:	xerces-j
@@ -74,7 +75,8 @@ unset JAVA_HOME || :
 	--with-xalan2-jar=%{_javadir}/xalan.jar \
 	--with-xalan2-serializer-jar=%{_javadir}/serializer.jar \
 	--with-xerces2-jar=%{_javadir}/xerces.jar \
-	--with-openjdk-src=${PWD}/openjdk
+	--with-openjdk-src-dir=${PWD}/openjdk \
+	--with-rhino=%{_javadir}/js.jar
 
 %{__make} -j1 \
 	SHELL=/bin/bash
