@@ -65,6 +65,8 @@ projektu GNU Classpath.
 sed -i -e 's#^PRINTF.*=.*#PRINTF = /bin/printf#g' \
 	openjdk/*/make/common/shared/Defs-utils.gmk
 
+mv openjdk openjdk-src
+
 %build
 unset JAVA_HOME || :
 %configure \
@@ -75,7 +77,7 @@ unset JAVA_HOME || :
 	--with-xalan2-jar=%{_javadir}/xalan.jar \
 	--with-xalan2-serializer-jar=%{_javadir}/serializer.jar \
 	--with-xerces2-jar=%{_javadir}/xerces.jar \
-	--with-openjdk-src-dir=${PWD}/openjdk \
+	--with-openjdk-src-dir=${PWD}/openjdk-src \
 	--with-rhino=%{_javadir}/js.jar
 
 %{__make} -j1 \
