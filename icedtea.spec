@@ -2,7 +2,7 @@
 # - fix bash substitution
 #
 Summary:	OpenJDK and GNU Classpath code
-SummarY(pl.UTF-8):	Kod OpenJDK i GNU Classpath
+Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea
 Version:	1.8
 Release:	0.1
