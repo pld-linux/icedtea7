@@ -3,7 +3,7 @@
 #
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
-Name:		icedtea
+Name:		icedtea7
 Version:	1.8
 Release:	0.1
 License:	GPL
