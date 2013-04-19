@@ -2,13 +2,13 @@
 # - install .ttf fonts (same as in sun-java-base-jre-X11 package) or configure
 #   it to use system fonts (is it possible?).
 
-%bcond_with bootstrap	# don't use an installed icedtea6, use ecj instead
+%bcond_without bootstrap # don't build a bootstrap version, using icedtea6
 %bcond_without nss	# don't use NSS
 
 %if %{with bootstrap}
-%define		use_jdk	java-gcj-compat
-%else
 %define		use_jdk	icedtea6
+%else
+%define		use_jdk	icedtea7
 %endif
 
 # class data version seen with file(1) that this jvm is able to load
@@ -16,24 +16,42 @@
 # JDK/JRE version, as returned with `java -version`, '_' replaced with '.'
 %define		_jdkversion 1.6.0.24
 
+# hardcoded in Makefile.am
+%define corba_changeset 516aae5f27cf
+%define jaxp_changeset 1fbe99283d97
+%define jaxws_changeset 3c7be82314bf
+%define jdk_changeset deac45dc94f0
+%define langtools_changeset 41426c72b802
+%define openjdk_changeset ed02a059ea15
+%define cacao_version a567bcb7f589
+%define jamvm_version 0972452d441544f7dd29c55d64f1ce3a5db90d82
+
+# computed in Makefile.am
+%define hotspot_changeset a152dced63a1
+
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
-Name:		icedtea6
-Version:	1.11.4
+Name:		icedtea7
+Version:	2.3.8
 Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
-Source0:	http://icedtea.classpath.org/download/source/%{name}-%{version}.tar.gz
-# Source0-md5:	a5a3a5aeaba0ddf4c9fdf8e899bf77c2
-# following sources should match those in Makefile.am
-Source1:	http://download.java.net/openjdk/jdk6/promoted/b24/openjdk-6-src-b24-14_nov_2011.tar.gz
-# Source1-md5:	0eabdd360169144336e50081b8d01001
-Source2:	http://icedtea.classpath.org/download/drops/jdk6-jaxws2_1_6-2011_06_13.zip
-# Source2-md5:	8fd91b09b643a19a912b8a75e7a7a9d5
-Source3:	http://icedtea.classpath.org/download/drops/jdk6-jaf-b20.zip
-# Source3-md5:	bc95c133620bd68c161cac9891592901
-Source4:	http://icedtea.classpath.org/download/drops/jaxp144_03.zip
-# Source4-md5:	9eea471ad474040265c688858fcf09aa
+Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
+# Source0-md5:	d97294091190630d5a3bf78dd5ced8a8
+Source1:	http://icedtea.wildebeest.org/hg/release/icedtea7-forest-2.3/archive/%{openjdk_changeset}.tar.gz
+# Source1-md5:	8dfe5ea25699beca3790e571f6d022f2
+Source2:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/corba/archive/%{corba_changeset}.tar.gz
+# Source2-md5:	e422bbb643536aae24ab3b9b01fb2d9e
+Source3:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/jaxp/archive/%{jaxp_changeset}.tar.gz
+# Source3-md5:	2f03474793a19be65d202107e8e9dba8
+Source4:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/jaxws/archive/%{jaxws_changeset}.tar.gz
+# Source4-md5:	1d2bb2d5a378942dc9f6afb1c7d22ae2
+Source5:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/jdk/archive/%{jdk_changeset}.tar.gz
+# Source5-md5:	889476393eb7c9d3ffd0eec31ebed118
+Source6:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/langtools/archive/%{langtools_changeset}.tar.gz
+# Source6-md5:	afca36dae45fd483e2a455ccb57a1c8f
+Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/hotspot/archive/%{hotspot_changeset}.tar.gz
+# Source7-md5:	35798cd6f8a870d8c0925fe907c561f7
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-libpath.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
@@ -46,14 +64,12 @@ BuildRequires:	cups-devel
 BuildRequires:	/usr/bin/jar
 BuildRequires:	freetype-devel >= 2.3
 BuildRequires:	gawk
-%{?with_bootstrap:BuildRequires:	gcc-java >= 6:4.3}
 BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
 BuildRequires:	glibc-misc
 BuildRequires:	gtk+2-devel
 BuildRequires:	java-rhino
 BuildRequires:	java-xalan
-%{?with_bootstrap:BuildRequires:	java-xerces}
 %buildrequires_jdk
 BuildRequires:	libffi-devel
 # for /usr/share/java/ecj.jar:
@@ -354,7 +370,7 @@ Code examples for OpenJDK.
 Przykłady dla OpenJDK.
 
 %prep
-%setup -q
+%setup -qn icedtea-%{version}
 %patch0 -p1
 
 # patches to applied to the extracted sources
@@ -363,10 +379,13 @@ cp -p %{PATCH1} pld-patches
 
 # let the build system extract the sources where it wants them
 install -d drops
-ln -s %{SOURCE1} .
-ln -s %{SOURCE2} drops
-ln -s %{SOURCE3} drops
-ln -s %{SOURCE4} drops
+ln -s %{SOURCE1} openjdk.tar.gz
+ln -s %{SOURCE2} corba.tar.gz
+ln -s %{SOURCE3} jaxp.tar.gz
+ln -s %{SOURCE4} jaxws.tar.gz
+ln -s %{SOURCE5} jdk.tar.gz
+ln -s %{SOURCE6} langtools.tar.gz
+ln -s %{SOURCE7} hotspot.tar.gz
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -375,38 +394,48 @@ if [ ! -f /proc/self/stat ]; then
 	exit 1
 fi
 
-export JAVA_HOME=%{java_home}
-export PATH="$JAVA_HOME/bin:$PATH"
+unset JAVA_HOME
+
+mkdir build-bin
+export PATH="$(pwd)/build-bin:$PATH"
+
+# our /usr/bin/ant is quite broken and won't run properly
+# in the bootstrap JDK environment prepared by IcedTea build process
+cat >>build-bin/ant <<'EOF'
+#!/bin/sh
+
+exec java \
+	-classpath /usr/share/java/ant-launcher.jar \
+	-Dant.home=/usr/share/ant \
+	-Dant.home=/usr/share/ant/lib \
+	org.apache.tools.ant.launch.Launcher \
+	"$@"
+EOF
+chmod a+x build-bin/ant
 
 %{__aclocal}
 %{__autoconf}
 %{__automake}
 
+# NOTE: the weird '--disable-bootstrap' is how it is supposed to be
+# http://icedtea.classpath.org/wiki/CommonIssues#IcedTea7_building_on_systems_with_JDK_5_or_JDK_6
 %configure \
 	WGET=%{_bindir}/wget \
-%if %{with bootstrap}
-	--with-gcj-home=%{java_home} \
-	--with-ecj-jar=%{_javadir}/ecj.jar \
-%else
 	--with-jdk-home=%{java_home} \
-%endif
-	%{!?with_nss:--disable-nss} \
-	--with-xalan2-jar=%{_javadir}/xalan.jar \
-	--with-xalan2-serializer-jar=%{_javadir}/serializer.jar \
+	%{?with_bootstrap:--disable-bootstrap} \
+	--%{!?with_nss:dis}%{?with_nss:en}able-nss \
 	--with-rhino=%{_javadir}/js.jar
 
-%{__make} extract extract-ecj \
+%{__make} extract \
+	SHELL=/bin/bash \
 	DISTRIBUTION_PATCHES="$(echo pld-patches/*.patch)"
 
-%if %{with bootstrap}
-# Cannot do that as patch, as the sources are prepared by make
-%{__sed} -i -e's/CORBA_BUILD_ARGUMENTS = \\/CORBA_BUILD_ARGUMENTS = JVMLIB="" \\/' openjdk-ecj/make/corba-rules.gmk
-%endif
 # if dpkg-architecure is installed (like on carme) it will break the build
 # unless we disable using it somehow. As patching is difficult here:
-%{__sed} -i -e's/dpkg-architecture/dpkg-architecture__/' openjdk*/*/make/common/shared/Platform.gmk
+%{__sed} -i -e's/dpkg-architecture/dpkg-architecture__/' openjdk/*/make/common/shared/Platform.gmk
 
 %{__make} -j1 \
+	SHELL=/bin/bash \
 	DISABLE_HOTSPOT_OS_VERSION_CHECK=ok \
 	DISTRIBUTION_PATCHES="$(echo pld-patches/*.patch)" \
 	PRINTF=/bin/printf
