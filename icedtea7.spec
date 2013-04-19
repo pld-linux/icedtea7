@@ -4,6 +4,7 @@
 
 %bcond_without bootstrap # don't build a bootstrap version, using icedtea6
 %bcond_without nss	# don't use NSS
+%bcond_without cacerts	# don't include the default CA certificates
 
 %if %{with bootstrap}
 %define		use_jdk	icedtea6
@@ -52,6 +53,7 @@ Source6:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/langtools/a
 # Source6-md5:	afca36dae45fd483e2a455ccb57a1c8f
 Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/hotspot/archive/%{hotspot_changeset}.tar.gz
 # Source7-md5:	35798cd6f8a870d8c0925fe907c561f7
+Source10:	make-cacerts.sh
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-libpath.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
@@ -60,6 +62,7 @@ BuildRequires:	ant
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bash
+%{?with_cacerts:BuildRequires:	ca-certificates-update}
 BuildRequires:	cups-devel
 BuildRequires:	/usr/bin/jar
 BuildRequires:	freetype-devel >= 2.3
@@ -440,6 +443,8 @@ chmod a+x build-bin/ant
 	DISTRIBUTION_PATCHES="$(echo pld-patches/*.patch)" \
 	PRINTF=/bin/printf
 
+%{?with_cacerts:%{__sh} %{SOURCE10}}
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{dstdir},%{_mandir}/ja} \
@@ -501,6 +506,8 @@ done
 ln -s server/libjvm.so $RPM_BUILD_ROOT%{jredir}/lib/%{jre_arch}/libjvm.so
 
 %{__rm} $RPM_BUILD_ROOT%{dstdir}/{,jre/}{ASSEMBLY_EXCEPTION,LICENSE,THIRD_PARTY_README}
+
+%{?with_cacerts:install cacerts $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/security}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
