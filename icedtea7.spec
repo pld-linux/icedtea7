@@ -461,8 +461,8 @@ mv $RPM_BUILD_ROOT%{dstdir}/sample $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{vers
 mv $RPM_BUILD_ROOT%{dstdir}/src.zip $RPM_BUILD_ROOT%{_javasrcdir}/%{name}-jdk.zip
 
 # move manual pages to its place
-mv $RPM_BUILD_ROOT%{dstdir}/man/ja_JP.eucJP/man1 $RPM_BUILD_ROOT%{_mandir}/ja/man1
-rmdir $RPM_BUILD_ROOT%{dstdir}/man/ja_JP.eucJP
+mv $RPM_BUILD_ROOT%{dstdir}/man/ja_JP.UTF-8/man1 $RPM_BUILD_ROOT%{_mandir}/ja/man1
+rmdir $RPM_BUILD_ROOT%{dstdir}/man/ja_JP.UTF-8
 rm $RPM_BUILD_ROOT%{dstdir}/man/ja
 mv $RPM_BUILD_ROOT%{dstdir}/man/man1 $RPM_BUILD_ROOT%{_mandir}/man1
 rmdir $RPM_BUILD_ROOT%{dstdir}/man
@@ -520,6 +520,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/javadoc
 %attr(755,root,root) %{_bindir}/javah
 %attr(755,root,root) %{_bindir}/javap
+%attr(755,root,root) %{_bindir}/jcmd
 %attr(755,root,root) %{_bindir}/jconsole
 %attr(755,root,root) %{_bindir}/jdb
 %attr(755,root,root) %{_bindir}/jhat
@@ -547,6 +548,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/javadoc.1*
 %{_mandir}/man1/javah.1*
 %{_mandir}/man1/javap.1*
+%{_mandir}/man1/jcmd.1*
 %{_mandir}/man1/jconsole.1*
 %{_mandir}/man1/jdb.1*
 %{_mandir}/man1/jhat.1*
@@ -573,6 +575,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ja) %{_mandir}/ja/man1/javadoc.1*
 %lang(ja) %{_mandir}/ja/man1/javah.1*
 %lang(ja) %{_mandir}/ja/man1/javap.1*
+%lang(ja) %{_mandir}/ja/man1/jcmd.1*
 %lang(ja) %{_mandir}/ja/man1/jconsole.1*
 %lang(ja) %{_mandir}/ja/man1/jdb.1*
 %lang(ja) %{_mandir}/ja/man1/jhat.1*
@@ -610,6 +613,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{dstdir}/bin/javah
 %attr(755,root,root) %{dstdir}/bin/javap
 %attr(755,root,root) %{dstdir}/bin/jconsole
+%attr(755,root,root) %{dstdir}/bin/jcmd
 %attr(755,root,root) %{dstdir}/bin/jdb
 %attr(755,root,root) %{dstdir}/bin/jhat
 %attr(755,root,root) %{dstdir}/bin/jinfo
@@ -679,6 +683,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/*
 %dir %{dstdir}
+%{dstdir}/release
 %dir %{jredir}
 %{_jvmdir}/%{name}-jre
 %dir %{jredir}/bin
@@ -715,8 +720,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/headless/*.so
 %dir %{jredir}/lib/%{jre_arch}/jli
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/jli/*.so
-%dir %{jredir}/lib/%{jre_arch}/native_threads
-%attr(755,root,root) %{jredir}/lib/%{jre_arch}/native_threads/*.so
 %dir %{jredir}/lib/%{jre_arch}/server
 %{jredir}/lib/%{jre_arch}/server/Xusage.txt
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/server/*.so
@@ -731,14 +734,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libj2pkcs11.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjaas_unix.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjava.so
+%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjavajpeg.so
+%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjavalcms.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjava_crw_demo.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjawt.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjdwp.so
-%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjpeg.so
+%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjsdt.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjsig.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjsound.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjvm.so
-%attr(755,root,root) %{jredir}/lib/%{jre_arch}/liblcms.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libmanagement.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libmlib_image.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnet.so
@@ -748,13 +752,14 @@ rm -rf $RPM_BUILD_ROOT
 %ifnarch i486
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsaproc.so
 %endif
+%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsctp.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libunpack.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libverify.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libzip.so
-%{jredir}/lib/im
 %{jredir}/lib/images
 %{jredir}/lib/management
 %{jredir}/lib/security
+%{jredir}/lib/servicetag
 %{jredir}/lib/zi
 #
 %if %{with webstart}
