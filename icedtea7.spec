@@ -114,6 +114,12 @@ Obsoletes:	java-sun-jre-alsa
 Obsoletes:	java-sun-jre-jdbc
 Obsoletes:	java-sun-jre-X11
 Obsoletes:	java-sun-tools
+Obsoletes:	oracle-java7
+Obsoletes:	oracle-java7-jre
+Obsoletes:	oracle-java7-jre-alsa
+Obsoletes:	oracle-java7-jre-jdbc
+Obsoletes:	oracle-java7-jre-X11
+Obsoletes:	oracle-java7-tools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		dstreldir	%{name}-%{version}
@@ -166,6 +172,7 @@ Obsoletes:	java-blackdown
 Obsoletes:	java-gcj-compat-devel
 Obsoletes:	java-sun
 Obsoletes:	java5-sun
+Obsoletes:	oracle-java7
 Obsoletes:	jdk
 Obsoletes:	kaffe
 
@@ -225,6 +232,7 @@ Obsoletes:	java(jsse)
 Obsoletes:	java-gcj-compat
 Obsoletes:	java-sun-jre
 Obsoletes:	java5-sun-jre
+Obsoletes:	oracle-java7-jre
 Obsoletes:	jre
 
 %description jre
@@ -340,6 +348,7 @@ Group:		Development/Languages/Java
 Requires:	%{name}-jdk-base = %{version}-%{release}
 Requires:	%{name}-jre-X11 = %{version}-%{release}
 Obsoletes:	java-sun-appletviewer
+Obsoletes:	oracle-java7-appletviewer
 
 %description appletviewer
 Appletviewer from OpenJDK build using free software only.
