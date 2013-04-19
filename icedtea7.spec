@@ -407,7 +407,7 @@ cat >>build-bin/ant <<'EOF'
 exec java \
 	-classpath /usr/share/java/ant-launcher.jar \
 	-Dant.home=/usr/share/ant \
-	-Dant.home=/usr/share/ant/lib \
+	-Dant.lib=/usr/share/ant/lib \
 	org.apache.tools.ant.launch.Launcher \
 	"$@"
 EOF
