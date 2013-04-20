@@ -100,6 +100,7 @@ Requires:	%{name}-appletviewer = %{version}-%{release}
 Requires:	%{name}-jdk = %{version}-%{release}
 Suggests:	%{name}-jre-X11
 Suggests:	icedtea-web
+Obsoletes:	icedtea6
 Obsoletes:	java5-sun
 Obsoletes:	java5-sun-jre
 Obsoletes:	java5-sun-jre-jdbc
@@ -168,6 +169,7 @@ Provides:	j2sdk = %{_jdkversion}
 Provides:	jdk = %{_jdkversion}
 Obsoletes:	blackdown-java-sdk
 Obsoletes:	ibm-java
+Obsoletes:	icedtea6-jdk
 Obsoletes:	java-blackdown
 Obsoletes:	java-gcj-compat-devel
 Obsoletes:	java-sun
@@ -220,6 +222,7 @@ Provides:	java(jndi) = %{version}
 Provides:	java(jsse) = %{version}
 Provides:	java1.4
 Provides:	jre = %{_jdkversion}
+Obsoletes:	icedtea6-jre
 Obsoletes:	java(jaas)
 Obsoletes:	java(jaf)
 Obsoletes:	java(jaxp)
@@ -253,6 +256,7 @@ Group:		Development/Languages/Java
 Requires:	%{name}-jre = %{version}-%{release}
 Requires:	%{name}-jre-base-X11 = %{version}-%{release}
 Provides:	jre-X11 = %{_jdkversion}
+Obsoletes:	icedtea6-jre-X11
 
 %description jre-X11
 X11 support for OpenJDK runtime environment built using free software
@@ -326,6 +330,7 @@ Group:		Development/Languages/Java
 Requires:	%{name}-jdk-base = %{version}-%{release}
 Provides:	jar
 Obsoletes:	fastjar
+Obsoletes:	icedtea6-jar
 Obsoletes:	jar
 
 %description jar
@@ -347,6 +352,7 @@ Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath - narzędzie appletviewer
 Group:		Development/Languages/Java
 Requires:	%{name}-jdk-base = %{version}-%{release}
 Requires:	%{name}-jre-X11 = %{version}-%{release}
+Obsoletes:	icedtea6-appletviewer
 Obsoletes:	java-sun-appletviewer
 Obsoletes:	oracle-java7-appletviewer
 
