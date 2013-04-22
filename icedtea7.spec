@@ -257,6 +257,8 @@ Requires:	%{name}-jre = %{version}-%{release}
 Requires:	%{name}-jre-base-X11 = %{version}-%{release}
 Provides:	jre-X11 = %{_jdkversion}
 Obsoletes:	icedtea6-jre-X11
+Obsoletes:	java-sun-jre-X11
+Obsoletes:	oracle-java7-jre-X11
 
 %description jre-X11
 X11 support for OpenJDK runtime environment built using free software
