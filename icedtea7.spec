@@ -34,7 +34,7 @@ Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
 Version:	2.3.8
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
@@ -661,9 +661,7 @@ rm -rf $RPM_BUILD_ROOT
 %{dstdir}/lib/jconsole.jar
 %attr(755,root,root) %{dstdir}/lib/jexec
 %{dstdir}/lib/orb.idl
-%ifnarch i486
 %{dstdir}/lib/sa-jdi.jar
-%endif
 %{dstdir}/lib/tools.jar
 
 %files jre
@@ -733,7 +731,7 @@ rm -rf $RPM_BUILD_ROOT
 %{jredir}/lib/cmm
 %{jredir}/lib/ext
 %dir %{jredir}/lib/%{jre_arch}
-%ifnarch x86_64 i486
+%ifnarch x86_64
 %dir %{jredir}/lib/%{jre_arch}/client
 %{jredir}/lib/%{jre_arch}/client/Xusage.txt
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/client/*.so
@@ -771,9 +769,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnio.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnpt.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/librmi.so
-%ifnarch i486
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsaproc.so
-%endif
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsctp.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libunpack.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libverify.so
