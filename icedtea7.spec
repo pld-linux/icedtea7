@@ -129,7 +129,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		jredir		%{_jvmdir}/%{jrereldir}
 %define		jvmjardir	%{_jvmjardir}/%{name}-%{version}
 
-%ifarch x86_64 amd64
+%ifarch %{x8664}
 %define		jre_arch	amd64
 %else
 %define		jre_arch	i386
@@ -687,8 +687,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/tnameserv.1*
 %{_mandir}/man1/unpack200.1*
 %lang(ja) %{_mandir}/ja/man1/java.1*
-%ifnarch x86_64
-%endif
 %lang(ja) %{_mandir}/ja/man1/keytool.1*
 %lang(ja) %{_mandir}/ja/man1/orbd.1*
 %lang(ja) %{_mandir}/ja/man1/pack200.1*
@@ -733,7 +731,7 @@ rm -rf $RPM_BUILD_ROOT
 %{jredir}/lib/cmm
 %{jredir}/lib/ext
 %dir %{jredir}/lib/%{jre_arch}
-%ifnarch x86_64
+%ifnarch %{x8664}
 %dir %{jredir}/lib/%{jre_arch}/client
 %{jredir}/lib/%{jre_arch}/client/Xusage.txt
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/client/*.so
