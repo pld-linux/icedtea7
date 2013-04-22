@@ -2,7 +2,7 @@
 # - install .ttf fonts (same as in sun-java-base-jre-X11 package) or configure
 #   it to use system fonts (is it possible?).
 
-%bcond_without bootstrap # don't build a bootstrap version, using icedtea6
+%bcond_with bootstrap   # build a bootstrap version, using icedtea6
 %bcond_without nss	# don't use NSS
 %bcond_without cacerts	# don't include the default CA certificates
 
@@ -34,7 +34,7 @@ Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
 Version:	2.3.8
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
