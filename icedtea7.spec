@@ -18,41 +18,41 @@
 %define		_jdkversion 1.7.0.17
 
 # hardcoded in Makefile.am
-%define corba_changeset 516aae5f27cf
-%define jaxp_changeset 1fbe99283d97
-%define jaxws_changeset 3c7be82314bf
-%define jdk_changeset deac45dc94f0
-%define langtools_changeset 41426c72b802
-%define openjdk_changeset ed02a059ea15
+%define corba_changeset 8ed5df839fbc
+%define jaxp_changeset 8f220f7b51c7
+%define jaxws_changeset 652eb396f959
+%define jdk_changeset 7958751eb9ef
+%define langtools_changeset 3c8eb52a32ea
+%define openjdk_changeset e2f5917da3c1
 %define cacao_version a567bcb7f589
 %define jamvm_version 0972452d441544f7dd29c55d64f1ce3a5db90d82
 
 # computed in Makefile.am
-%define hotspot_changeset a152dced63a1
+%define hotspot_changeset b59e02d9e72b
 
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
-Version:	2.3.8
-Release:	5
+Version:	2.4.3
+Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
-# Source0-md5:	d97294091190630d5a3bf78dd5ced8a8
-Source1:	http://icedtea.wildebeest.org/hg/release/icedtea7-forest-2.3/archive/%{openjdk_changeset}.tar.gz
-# Source1-md5:	8dfe5ea25699beca3790e571f6d022f2
-Source2:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/corba/archive/%{corba_changeset}.tar.gz
-# Source2-md5:	e422bbb643536aae24ab3b9b01fb2d9e
-Source3:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/jaxp/archive/%{jaxp_changeset}.tar.gz
-# Source3-md5:	2f03474793a19be65d202107e8e9dba8
-Source4:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/jaxws/archive/%{jaxws_changeset}.tar.gz
-# Source4-md5:	1d2bb2d5a378942dc9f6afb1c7d22ae2
-Source5:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/jdk/archive/%{jdk_changeset}.tar.gz
-# Source5-md5:	889476393eb7c9d3ffd0eec31ebed118
-Source6:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/langtools/archive/%{langtools_changeset}.tar.gz
-# Source6-md5:	afca36dae45fd483e2a455ccb57a1c8f
-Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.3/hotspot/archive/%{hotspot_changeset}.tar.gz
-# Source7-md5:	35798cd6f8a870d8c0925fe907c561f7
+# Source0-md5:	3168d6aca14ec8a0905b3a4b95adad76
+Source1:	http://icedtea.wildebeest.org/hg/release/icedtea7-forest-2.4/archive/%{openjdk_changeset}.tar.gz
+# Source1-md5:	8235706f907e9da528921af946d73c57
+Source2:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/corba/archive/%{corba_changeset}.tar.gz
+# Source2-md5:	90bc51f1137982901325ec040fdcd9db
+Source3:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/jaxp/archive/%{jaxp_changeset}.tar.gz
+# Source3-md5:	b43c0efffbcfccc348f4ee781f23ebcf
+Source4:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/jaxws/archive/%{jaxws_changeset}.tar.gz
+# Source4-md5:	f70b570a0cb47052339139ba6e4e463e
+Source5:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/jdk/archive/%{jdk_changeset}.tar.gz
+# Source5-md5:	991c3f6c24478c6c4f83a53fe6407f7f
+Source6:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/langtools/archive/%{langtools_changeset}.tar.gz
+# Source6-md5:	ba3a2ab192c22e55184a63fb499d00f8
+Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/hotspot/archive/%{hotspot_changeset}.tar.gz
+# Source7-md5:	de6548eb6664d3bb4d1b64a93fd258e0
 Source10:	make-cacerts.sh
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-libpath.patch
@@ -531,7 +531,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog HACKING NEWS README THANKYOU
+%doc AUTHORS ChangeLog HACKING NEWS README
 
 %files jdk
 %defattr(644,root,root,755)
@@ -665,6 +665,10 @@ rm -rf $RPM_BUILD_ROOT
 %{dstdir}/lib/orb.idl
 %{dstdir}/lib/sa-jdi.jar
 %{dstdir}/lib/tools.jar
+%dir %{dstdir}/lib/%{jre_arch}
+%dir %{dstdir}/lib/%{jre_arch}/jli
+%attr(755,root,root) %{dstdir}/lib/%{jre_arch}/jli/*.so
+%{dstdir}/tapset
 
 %files jre
 %defattr(644,root,root,755)
@@ -742,6 +746,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/jli/*.so
 %dir %{jredir}/lib/%{jre_arch}/server
 %{jredir}/lib/%{jre_arch}/server/Xusage.txt
+%{jredir}/lib/%{jre_arch}/server/classes.jsa
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/server/*.so
 %{jredir}/lib/%{jre_arch}/jvm.cfg
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libattach.so
@@ -750,6 +755,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libhprof.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libinstrument.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libj2gss.so
+%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libj2krb5.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libj2pcsc.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libj2pkcs11.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjaas_unix.so
@@ -768,7 +774,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnet.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnio.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnpt.so
-%attr(755,root,root) %{jredir}/lib/%{jre_arch}/librmi.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsaproc.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsctp.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libunpack.so
@@ -777,7 +782,6 @@ rm -rf $RPM_BUILD_ROOT
 %{jredir}/lib/images
 %{jredir}/lib/management
 %{jredir}/lib/security
-%{jredir}/lib/servicetag
 %{jredir}/lib/zi
 #
 %if %{with webstart}
