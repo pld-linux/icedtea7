@@ -71,9 +71,11 @@ BuildRequires:	giflib-devel
 BuildRequires:	glib2-devel
 BuildRequires:	glibc-misc
 BuildRequires:	gtk+2-devel
+BuildRequires:	heimdal-devel
 BuildRequires:	java-rhino
 BuildRequires:	java-xalan
 %buildrequires_jdk
+BuildRequires:	lcms2-devel
 BuildRequires:	libffi-devel
 # for /usr/share/java/ecj.jar:
 BuildRequires:	libgcj
