@@ -138,7 +138,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 
 # to break artificial subpackage dependency loops
-%define		_noautoreq	'libmawt.so' 'java(ClassDataVersion)'
+%define		_noautoreq	'libmawt.so' java\\\\(ClassDataVersion\\\\)
 
 %description
 The IcedTea project provides a harness to build the source code from
