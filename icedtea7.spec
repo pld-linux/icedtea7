@@ -460,7 +460,8 @@ chmod a+x build-bin/ant
 	SHELL=/bin/bash \
 	DISABLE_HOTSPOT_OS_VERSION_CHECK=ok \
 	DISTRIBUTION_PATCHES="$(echo pld-patches/*.patch)" \
-	PRINTF=/bin/printf
+	PRINTF=/bin/printf \
+	MAX_VM_MEMORY=1024
 
 %{?with_cacerts:%{__sh} %{SOURCE10}}
 
