@@ -54,9 +54,11 @@ Source6:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/langtools/a
 Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/hotspot/archive/%{hotspot_changeset}.tar.gz
 # Source7-md5:	de6548eb6664d3bb4d1b64a93fd258e0
 Source10:	make-cacerts.sh
+# patches for the IcedTea files
 Patch0:		%{name}-i486.patch
-Patch1:		%{name}-libpath.patch
-Patch2:		%{name}-never_test_gamma.patch
+Patch1:		%{name}-never_test_gamma.patch
+# patches applied to the extracted sources
+Patch100:	%{name}-libpath.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	ant
@@ -395,11 +397,11 @@ Przykłady dla OpenJDK.
 %prep
 %setup -qn icedtea-%{version}
 %patch0 -p1
-%patch2 -p1
+%patch1 -p1
 
 # patches to applied to the extracted sources
 install -d pld-patches
-cp -p %{PATCH1} pld-patches
+cp -p %{PATCH100} pld-patches
 
 # let the build system extract the sources where it wants them
 install -d drops
