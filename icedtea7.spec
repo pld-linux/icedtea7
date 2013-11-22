@@ -59,6 +59,7 @@ Patch0:		%{name}-i486.patch
 Patch1:		%{name}-never_test_gamma.patch
 # patches applied to the extracted sources
 Patch100:	%{name}-libpath.patch
+Patch101:	%{name}-zero_le.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	ant
@@ -401,7 +402,7 @@ Przykłady dla OpenJDK.
 
 # patches to applied to the extracted sources
 install -d pld-patches
-cp -p %{PATCH100} pld-patches
+cp -p %{PATCH100} %{PATCH101} pld-patches
 
 # let the build system extract the sources where it wants them
 install -d drops
