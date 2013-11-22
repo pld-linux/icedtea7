@@ -56,6 +56,7 @@ Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/hotspot/arc
 Source10:	make-cacerts.sh
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-libpath.patch
+Patch2:		%{name}-never_test_gamma.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	ant
@@ -394,6 +395,7 @@ Przykłady dla OpenJDK.
 %prep
 %setup -qn icedtea-%{version}
 %patch0 -p1
+%patch2 -p1
 
 # patches to applied to the extracted sources
 install -d pld-patches
