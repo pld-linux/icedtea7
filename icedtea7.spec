@@ -671,7 +671,9 @@ rm -rf $RPM_BUILD_ROOT
 %{dstdir}/lib/jconsole.jar
 %attr(755,root,root) %{dstdir}/lib/jexec
 %{dstdir}/lib/orb.idl
+%ifnarch i486
 %{dstdir}/lib/sa-jdi.jar
+%endif
 %{dstdir}/lib/tools.jar
 %dir %{dstdir}/lib/%{jre_arch}
 %dir %{dstdir}/lib/%{jre_arch}/jli
