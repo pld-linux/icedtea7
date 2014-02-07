@@ -18,48 +18,47 @@
 %define		_jdkversion 1.7.0.17
 
 # hardcoded in Makefile.am
-%define corba_changeset 8ed5df839fbc
-%define jaxp_changeset 8f220f7b51c7
-%define jaxws_changeset 652eb396f959
-%define jdk_changeset 7958751eb9ef
-%define langtools_changeset 3c8eb52a32ea
-%define openjdk_changeset e2f5917da3c1
-%define cacao_version a567bcb7f589
-%define jamvm_version 0972452d441544f7dd29c55d64f1ce3a5db90d82
+%define corba_changeset 3594dbde270d
+%define jaxp_changeset 8fe156ad49e2
+%define jaxws_changeset 32ea8b1ed91a
+%define jdk_changeset 9db88c18e114
+%define langtools_changeset dabd37b7e295
+%define openjdk_changeset 410eb7fef869
+%define cacao_version e215e36be9fc
+%define jamvm_version ac22c9948434e528ece451642b4ebde40953ee7e
 
-# computed in Makefile.am
-%define hotspot_changeset b59e02d9e72b
+# defined in 'hostpot.map'
+%define hotspot_changeset 2cb58882dac3
 
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
-Version:	2.4.3
-Release:	3
+Version:	2.4.5
+Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
-# Source0-md5:	3168d6aca14ec8a0905b3a4b95adad76
+# Source0-md5:	6dcc544657ade213d01017354a6f9858
 Source1:	http://icedtea.wildebeest.org/hg/release/icedtea7-forest-2.4/archive/%{openjdk_changeset}.tar.gz
-# Source1-md5:	8235706f907e9da528921af946d73c57
+# Source1-md5:	09b9db8ca0b833070326573c3dac56e2
 Source2:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/corba/archive/%{corba_changeset}.tar.gz
-# Source2-md5:	90bc51f1137982901325ec040fdcd9db
+# Source2-md5:	adf888756629bdcb37f71451269ac42e
 Source3:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/jaxp/archive/%{jaxp_changeset}.tar.gz
-# Source3-md5:	b43c0efffbcfccc348f4ee781f23ebcf
+# Source3-md5:	1c42344779d49baed24724535a7e2c9b
 Source4:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/jaxws/archive/%{jaxws_changeset}.tar.gz
-# Source4-md5:	f70b570a0cb47052339139ba6e4e463e
+# Source4-md5:	256148d7e7f5619addde91fd14bc3361
 Source5:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/jdk/archive/%{jdk_changeset}.tar.gz
-# Source5-md5:	991c3f6c24478c6c4f83a53fe6407f7f
+# Source5-md5:	3370074398071b4104e0e89efc9a4a56
 Source6:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/langtools/archive/%{langtools_changeset}.tar.gz
-# Source6-md5:	ba3a2ab192c22e55184a63fb499d00f8
+# Source6-md5:	7605555236ffd8ac6bdedc6bc9b61c26
 Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/hotspot/archive/%{hotspot_changeset}.tar.gz
-# Source7-md5:	de6548eb6664d3bb4d1b64a93fd258e0
+# Source7-md5:	67bb16313215e6da72bda7dc0090bb6a
 Source10:	make-cacerts.sh
 # patches for the IcedTea files
 Patch0:		%{name}-i486.patch
 Patch1:		%{name}-never_test_gamma.patch
 # patches applied to the extracted sources
 Patch100:	%{name}-libpath.patch
-Patch101:	%{name}-zero_le.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	ant
@@ -402,7 +401,7 @@ Przykłady dla OpenJDK.
 
 # patches to applied to the extracted sources
 install -d pld-patches
-cp -p %{PATCH100} %{PATCH101} pld-patches
+cp -p %{PATCH100} pld-patches
 
 # let the build system extract the sources where it wants them
 install -d drops
