@@ -213,6 +213,7 @@ Summary:	OpenJDK and GNU Classpath code - runtime environment
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath - środowisko uruchomieniowe
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
+Requires:	nss >= 1:3.13.4
 Provides:	java
 Provides:	java(ClassDataVersion) = %{_classdataversion}
 Provides:	java(jaas) = %{version}
