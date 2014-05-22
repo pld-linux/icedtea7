@@ -55,8 +55,7 @@ Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/hotspot/arc
 # Source7-md5:	0381ef3920f1ff5c8ac6c8860974d8cc
 Source10:	make-cacerts.sh
 # patches for the IcedTea files
-Patch0:		%{name}-i486.patch
-Patch1:		%{name}-never_test_gamma.patch
+Patch0:		%{name}-never_test_gamma.patch
 # patches applied to the extracted sources
 Patch100:	%{name}-libpath.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
@@ -85,6 +84,9 @@ BuildRequires:	libgcj
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-static
+%ifarch i486
+BuildRequires:	llvm-devel
+%endif
 BuildRequires:	lsb-release
 %{?with_nss:BuildRequires:	nss-devel}
 BuildRequires:	pkgconfig
@@ -398,8 +400,7 @@ Przykłady dla OpenJDK.
 
 %prep
 %setup -qn icedtea-%{version}
-%patch0 -p1
-%patch1 -p1
+#%%patch0 -p1
 
 # patches to applied to the extracted sources
 install -d pld-patches
@@ -453,6 +454,9 @@ chmod a+x build-bin/ant
 	--with-abs-install-dir=%{dstdir} \
 	%{?with_bootstrap:--disable-bootstrap} \
 	--%{!?with_nss:dis}%{?with_nss:en}able-nss \
+%ifarch i486
+	--enable-shark \
+%endif
 	--with-rhino=%{_javadir}/js.jar
 
 %{__make} extract \
