@@ -89,6 +89,7 @@ BuildRequires:	lsb-release
 %{?with_nss:BuildRequires:	nss-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.557
+BuildRequires:	systemtap-sdt-devel
 BuildRequires:	unzip
 BuildRequires:	util-linux
 BuildRequires:	xorg-lib-libX11-devel
@@ -449,6 +450,7 @@ chmod a+x build-bin/ant
 %configure \
 	WGET=%{_bindir}/wget \
 	--with-jdk-home=%{java_home} \
+	--with-abs-install-dir=%{dstdir} \
 	%{?with_bootstrap:--disable-bootstrap} \
 	--%{!?with_nss:dis}%{?with_nss:en}able-nss \
 	--with-rhino=%{_javadir}/js.jar
