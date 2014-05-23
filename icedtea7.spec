@@ -34,7 +34,7 @@ Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
 Version:	2.4.7
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
@@ -54,9 +54,8 @@ Source6:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/langtools/a
 Source7:	http://icedtea.classpath.org/hg/release/icedtea7-forest-2.4/hotspot/archive/%{hotspot_changeset}.tar.gz
 # Source7-md5:	0381ef3920f1ff5c8ac6c8860974d8cc
 Source10:	make-cacerts.sh
-# patches for the IcedTea files
-Patch0:		%{name}-never_test_gamma.patch
-# patches applied to the extracted sources
+# 0-99 patches for the IcedTea files
+# 100-... patches applied to the extracted sources
 Patch100:	%{name}-libpath.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
@@ -400,7 +399,6 @@ Przykłady dla OpenJDK.
 
 %prep
 %setup -qn icedtea-%{version}
-#%%patch0 -p1
 
 # patches to applied to the extracted sources
 install -d pld-patches
