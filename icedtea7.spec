@@ -677,9 +677,7 @@ rm -rf $RPM_BUILD_ROOT
 %{dstdir}/lib/jconsole.jar
 %attr(755,root,root) %{dstdir}/lib/jexec
 %{dstdir}/lib/orb.idl
-%ifnarch i486
 %{dstdir}/lib/sa-jdi.jar
-%endif
 %{dstdir}/lib/tools.jar
 %dir %{dstdir}/lib/%{jre_arch}
 %dir %{dstdir}/lib/%{jre_arch}/jli
@@ -751,7 +749,7 @@ rm -rf $RPM_BUILD_ROOT
 %{jredir}/lib/cmm
 %{jredir}/lib/ext
 %dir %{jredir}/lib/%{jre_arch}
-%ifnarch %{x8664} i486
+%ifnarch %{x8664}
 %dir %{jredir}/lib/%{jre_arch}/client
 %{jredir}/lib/%{jre_arch}/client/Xusage.txt
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/client/*.so
@@ -762,9 +760,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/jli/*.so
 %dir %{jredir}/lib/%{jre_arch}/server
 %{jredir}/lib/%{jre_arch}/server/Xusage.txt
-%ifnarch i486
 %{jredir}/lib/%{jre_arch}/server/classes.jsa
-%endif
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/server/*.so
 %{jredir}/lib/%{jre_arch}/jvm.cfg
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libattach.so
@@ -792,9 +788,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnet.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnio.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnpt.so
-%ifnarch i486
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsaproc.so
-%endif
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsctp.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libunpack.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libverify.so
