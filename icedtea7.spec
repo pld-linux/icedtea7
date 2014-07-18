@@ -15,7 +15,7 @@
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 51.0
 # JDK/JRE version, as returned with `java -version`, '_' replaced with '.'
-%define		_jdkversion 1.7.0.17
+%define		_jdkversion 1.7.0.65
 
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
