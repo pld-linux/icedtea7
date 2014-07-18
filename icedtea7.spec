@@ -317,6 +317,18 @@ software only.
 Biblioteki obsługi czcionek dla OpenJDK zbudowane wyłącznie przy
 użyciu wolnego oprogramowania.
 
+%package jre-base-gtk
+Summary:	IcedTea6 OpenJDK - runtime environment - GTK support
+Summary(pl.UTF-8):	IcedTea6 OpenJDK - środowisko uruchomieniowe - obsługa GTK
+Group:		Development/Languages/Java
+Requires:	%{name}-jre-base = %{version}-%{release}
+
+%description jre-base-gtk
+GTK support for OpenJDK runtime environment.
+
+%description jre-base-gtk -l pl.UTF-8
+Biblioteki GTK dla OpenJDK.
+
 %package jar
 Summary:	OpenJDK and GNU Classpath code - JAR tool
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath - narzędzie JAR
@@ -826,6 +838,10 @@ rm -rf $RPM_BUILD_ROOT
 %files jre-base-freetype
 %defattr(644,root,root,755)
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libfontmanager.so
+
+%files jre-base-gtk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjavagtk.so
 
 %files jar
 %defattr(644,root,root,755)
