@@ -1,3 +1,10 @@
+#
+# IMPORTANT:
+#	when upgrading remember to redownload all sources from the upstream
+#	URLs and update MD5 sums, as there is no change in the file names
+#	and distfiles would provide outdated files
+#
+
 # TODO:
 # - install .ttf fonts (same as in sun-java-base-jre-X11 package) or configure
 #   it to use system fonts (is it possible?).
@@ -20,26 +27,26 @@
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
-Version:	2.5.1
+Version:	2.5.3
 Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
-# Source0-md5:	30fa67392947b2e1b5a608a97fece3ee
+# Source0-md5:	dfd8f5f356a5fc05e63bb38e7c4c030a
 Source1:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/openjdk.tar.bz2
-# Source1-md5:	9a599c97007df0f6156767e914063956
+# Source1-md5:	730679eec8f645c05c0c518ae73a6f6d
 Source2:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/corba.tar.bz2
-# Source2-md5:	381f9c3694b302064520b603feb8aba3
+# Source2-md5:	b7dbab5f1ca314d613a9e7cf0a5939e1
 Source3:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jaxp.tar.bz2
-# Source3-md5:	0c11aeb494fb76143ccf0b58b0b6ac96
+# Source3-md5:	40e6d2e0e6b35a671bf1b0908c63ef9d
 Source4:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jaxws.tar.bz2
-# Source4-md5:	ab102f6a0e4bb56a5153d0a005451566
+# Source4-md5:	1615b1c82ac6a189d6805eedb8692402
 Source5:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jdk.tar.bz2
-# Source5-md5:	5183620f97e366267568f4e613b71f28
+# Source5-md5:	7cc129b8ff8f195583cf40620588e013
 Source6:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/langtools.tar.bz2
-# Source6-md5:	04b5c20b2320f75c1f510e0b53f6480c
+# Source6-md5:	fd28b781a95a609cd966c7048486e4ca
 Source7:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/hotspot.tar.bz2
-# Source7-md5:	79442639a24fedefe0ca5c3a66f87fe1
+# Source7-md5:	e58128728b81b99bf94d9cac39015975
 Source10:	make-cacerts.sh
 # 0-99 patches for the IcedTea files
 # 100-... patches applied to the extracted sources
