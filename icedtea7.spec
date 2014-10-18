@@ -28,7 +28,7 @@ Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
 Version:	2.5.3
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
@@ -78,7 +78,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-static
 BuildRequires:	lsb-release
-%{?with_nss:BuildRequires:	nss-devel}
+%{?with_nss:BuildRequires:	nss-devel >= 1:3.17.2-5}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.557
 BuildRequires:	systemtap-sdt-devel
@@ -455,6 +455,7 @@ chmod a+x build-bin/ant
 	--with-abs-install-dir=%{dstdir} \
 	%{?with_bootstrap:--disable-bootstrap} \
 	--%{!?with_nss:dis}%{?with_nss:en}able-nss \
+	--%{!?with_nss:dis}%{?with_nss:en}able-sunec \
 	--with-rhino=%{_javadir}/js.jar
 
 %{__make} extract \
@@ -788,6 +789,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnpt.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsaproc.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsctp.so
+%{?with_nss:%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsunec.so}
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libunpack.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libverify.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libzip.so
