@@ -28,7 +28,7 @@ Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
 Version:	2.5.3
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
@@ -51,6 +51,7 @@ Source10:	make-cacerts.sh
 # 0-99 patches for the IcedTea files
 # 100-... patches applied to the extracted sources
 Patch100:	%{name}-libpath.patch
+Patch101:	%{name}-giflib.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	ant
@@ -62,7 +63,7 @@ BuildRequires:	cups-devel
 BuildRequires:	/usr/bin/jar
 BuildRequires:	freetype-devel >= 2.3
 BuildRequires:	gawk
-BuildRequires:	giflib-devel
+BuildRequires:	giflib-devel >= 5.1
 BuildRequires:	glib2-devel
 BuildRequires:	glibc-misc
 BuildRequires:	gtk+2-devel
@@ -406,6 +407,7 @@ Przykłady dla OpenJDK.
 # patches to applied to the extracted sources
 install -d pld-patches
 cp -p %{PATCH100} pld-patches
+cp -p %{PATCH101} pld-patches
 
 # let the build system extract the sources where it wants them
 install -d drops
