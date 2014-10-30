@@ -453,6 +453,7 @@ chmod a+x build-bin/ant
 # http://icedtea.classpath.org/wiki/CommonIssues#IcedTea7_building_on_systems_with_JDK_5_or_JDK_6
 %configure \
 	WGET=%{_bindir}/wget \
+	--disable-downloading \
 	--with-jdk-home=%{java_home} \
 	--with-abs-install-dir=%{dstdir} \
 	%{?with_bootstrap:--disable-bootstrap} \
