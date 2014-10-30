@@ -28,7 +28,7 @@ Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
 Version:	2.5.3
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
@@ -456,7 +456,7 @@ chmod a+x build-bin/ant
 	--disable-downloading \
 	--with-jdk-home=%{java_home} \
 	--with-abs-install-dir=%{dstdir} \
-	%{?with_bootstrap:--disable-bootstrap} \
+	--disable-bootstrap \
 	--%{!?with_nss:dis}%{?with_nss:en}able-nss \
 	--%{!?with_nss:dis}%{?with_nss:en}able-sunec \
 	--with-rhino=%{_javadir}/js.jar
