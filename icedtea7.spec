@@ -12,6 +12,7 @@
 %bcond_with bootstrap   # build a bootstrap version, using icedtea6
 %bcond_without nss	# don't use NSS
 %bcond_without cacerts	# don't include the default CA certificates
+%bcond_with sunec	# enable Sun EC crypt lib
 
 %if %{with bootstrap}
 %define		use_jdk	icedtea6
@@ -28,7 +29,7 @@ Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
 Version:	2.5.3
-Release:	5
+Release:	6
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
@@ -154,7 +155,7 @@ dostarcza zamienniki biblioteczne binarnych wtyczek pochodzące z
 projektu GNU Classpath.
 
 To jest meta-pakiet, który, za pośrednictwem zależności, dostarcza
-wszystkie komponenty IcedTea6, w tym środowisko programistyczne
+wszystkie komponenty IcedTea7, w tym środowisko programistyczne
 (OpenJDK) i uruchomieniowe (JRE).
 
 %package jdk
@@ -247,11 +248,11 @@ IcedTea6 default JRE.
 Ten pakiet tworzy symboliczne dowiązania do środowiska
 uruchomieniowego OpenJDK, dostarczanych przez pakiet %{name}-jre-base,
 w standardowych systemowych ścieżkach takich jak %{_bindir},
-sprawiając tym samym, że IcedTea6 staje się domyślnym JRE w systemie.
+sprawiając tym samym, że IcedTea7 staje się domyślnym JRE w systemie.
 
 %package jre-X11
-Summary:	IcedTea6 OpenJDK - runtime environment - X11 support
-Summary(pl.UTF-8):	IcedTea6 OpenJDK - środowisko uruchomieniowe - obsługa X11
+Summary:	IcedTea7 OpenJDK - runtime environment - X11 support
+Summary(pl.UTF-8):	IcedTea7 OpenJDK - środowisko uruchomieniowe - obsługa X11
 Group:		Development/Languages/Java
 Requires:	%{name}-jre = %{version}-%{release}
 Requires:	%{name}-jre-base-X11 = %{version}-%{release}
@@ -283,8 +284,8 @@ OpenJDK runtime environment built using free software only.
 wolnego oprogramowania.
 
 %package jre-base-X11
-Summary:	IcedTea6 OpenJDK - runtime environment - X11 support
-Summary(pl.UTF-8):	IcedTea6 OpenJDK - środowisko uruchomieniowe - obsługa X11
+Summary:	IcedTea7 OpenJDK - runtime environment - X11 support
+Summary(pl.UTF-8):	IcedTea7 OpenJDK - środowisko uruchomieniowe - obsługa X11
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
 Requires:	%{name}-jre-base-freetype = %{version}-%{release}
@@ -298,8 +299,8 @@ Biblioteki X11 dla środowiska OpenJDK zbudowany wyłocznie przy uzyciu
 wolnego oprogramowania.
 
 %package jre-base-alsa
-Summary:	IcedTea6 OpenJDK - runtime environment - ALSA support
-Summary(pl.UTF-8):	IcedTea6 OpenJDK - środowisko uruchomieniowe - obsługa ALSA
+Summary:	IcedTea7 OpenJDK - runtime environment - ALSA support
+Summary(pl.UTF-8):	IcedTea7 OpenJDK - środowisko uruchomieniowe - obsługa ALSA
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
 
@@ -312,8 +313,8 @@ Biblioteki ALSA rozszerzające środowisko OpenJDK o obsługę dźwięku
 zbudowane przy uzyciu wyłącznie wolnego oprogramowania.
 
 %package jre-base-freetype
-Summary:	IcedTea6 OpenJDK - runtime environment - font support
-Summary(pl.UTF-8):	IcedTea6 OpenJDK - środowisko uruchomieniowe - obsługa fontów
+Summary:	IcedTea7 OpenJDK - runtime environment - font support
+Summary(pl.UTF-8):	IcedTea7 OpenJDK - środowisko uruchomieniowe - obsługa fontów
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
 
@@ -326,8 +327,8 @@ Biblioteki obsługi czcionek dla OpenJDK zbudowane wyłącznie przy
 użyciu wolnego oprogramowania.
 
 %package jre-base-gtk
-Summary:	IcedTea6 OpenJDK - runtime environment - GTK support
-Summary(pl.UTF-8):	IcedTea6 OpenJDK - środowisko uruchomieniowe - obsługa GTK
+Summary:	IcedTea7 OpenJDK - runtime environment - GTK support
+Summary(pl.UTF-8):	IcedTea7 OpenJDK - środowisko uruchomieniowe - obsługa GTK
 Group:		Development/Languages/Java
 Requires:	%{name}-jre-base = %{version}-%{release}
 
@@ -458,7 +459,7 @@ chmod a+x build-bin/ant
 	--with-abs-install-dir=%{dstdir} \
 	--disable-bootstrap \
 	--%{!?with_nss:dis}%{?with_nss:en}able-nss \
-	--%{!?with_nss:dis}%{?with_nss:en}able-sunec \
+	--%{!?with_sunec:dis}%{?with_sunec:en}able-sunec \
 	--with-rhino=%{_javadir}/js.jar
 
 %{__make} extract \
@@ -792,7 +793,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnpt.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsaproc.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsctp.so
-%{?with_nss:%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsunec.so}
+%{?with_sunec:%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsunec.so}
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libunpack.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libverify.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libzip.so
