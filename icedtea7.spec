@@ -12,7 +12,7 @@
 %bcond_with bootstrap   # build a bootstrap version, using icedtea6
 %bcond_without nss	# don't use NSS
 %bcond_without cacerts	# don't include the default CA certificates
-%bcond_with sunec	# enable Sun EC crypt lib
+%bcond_without sunec	# enable Sun EC crypt lib
 
 %if %{with bootstrap}
 %define		use_jdk	icedtea6
@@ -29,7 +29,7 @@ Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
 Version:	2.5.3
-Release:	7
+Release:	8
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
