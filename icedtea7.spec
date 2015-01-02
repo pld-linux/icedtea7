@@ -50,11 +50,14 @@ Source7:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/hotspo
 # Source7-md5:	e58128728b81b99bf94d9cac39015975
 Source10:	make-cacerts.sh
 # 0-99 patches for the IcedTea files
+Patch0:		%{name}-x32-ac.patch
 # 100-... patches applied to the extracted sources
 Patch100:	%{name}-libpath.patch
 Patch101:	%{name}-giflib.patch
 Patch102:	icedtea7-bug-2123.patch
 Patch103:	icedtea7-bug-2135.patch
+Patch104:	%{name}-x32.patch
+Patch105:	currency-change-fix.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	ant
@@ -133,8 +136,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %ifarch %{x8664}
 %define		jre_arch	amd64
-%else
+%endif
+%ifarch %{ix86}
 %define		jre_arch	i386
+%endif
+%ifarch x32
+%define		jre_arch	x32
 %endif
 
 # to break artificial subpackage dependency loops
@@ -406,6 +413,7 @@ Przykłady dla OpenJDK.
 
 %prep
 %setup -qn icedtea-%{version}
+%patch0 -p1
 
 # patches to applied to the extracted sources
 install -d pld-patches
@@ -413,6 +421,10 @@ cp -p %{PATCH100} pld-patches
 cp -p %{PATCH101} pld-patches
 cp -p %{PATCH102} pld-patches
 cp -p %{PATCH103} pld-patches
+cp -p %{PATCH104} pld-patches
+%ifarch x32
+cp -p %{PATCH105} pld-patches
+%endif
 
 # let the build system extract the sources where it wants them
 install -d drops
@@ -433,7 +445,7 @@ fi
 
 unset JAVA_HOME
 
-mkdir build-bin
+mkdir -p build-bin
 export PATH="$(pwd)/build-bin:$PATH"
 
 # our /usr/bin/ant is quite broken and won't run properly
@@ -458,6 +470,9 @@ chmod a+x build-bin/ant
 # http://icedtea.classpath.org/wiki/CommonIssues#IcedTea7_building_on_systems_with_JDK_5_or_JDK_6
 %configure \
 	WGET=%{_bindir}/wget \
+%ifarch x32
+	--enable-zero \
+%endif
 	--disable-downloading \
 	--with-jdk-home=%{java_home} \
 	--with-abs-install-dir=%{dstdir} \
@@ -684,7 +699,9 @@ rm -rf $RPM_BUILD_ROOT
 %{dstdir}/lib/jconsole.jar
 %attr(755,root,root) %{dstdir}/lib/jexec
 %{dstdir}/lib/orb.idl
+%ifnarch x32
 %{dstdir}/lib/sa-jdi.jar
+%endif
 %{dstdir}/lib/tools.jar
 %dir %{dstdir}/lib/%{jre_arch}
 %dir %{dstdir}/lib/%{jre_arch}/jli
@@ -756,7 +773,7 @@ rm -rf $RPM_BUILD_ROOT
 %{jredir}/lib/cmm
 %{jredir}/lib/ext
 %dir %{jredir}/lib/%{jre_arch}
-%ifnarch %{x8664}
+%ifnarch %{x8664} x32
 %dir %{jredir}/lib/%{jre_arch}/client
 %{jredir}/lib/%{jre_arch}/client/Xusage.txt
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/client/*.so
@@ -767,7 +784,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/jli/*.so
 %dir %{jredir}/lib/%{jre_arch}/server
 %{jredir}/lib/%{jre_arch}/server/Xusage.txt
+%ifnarch x32
 %{jredir}/lib/%{jre_arch}/server/classes.jsa
+%endif
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/server/*.so
 %{jredir}/lib/%{jre_arch}/jvm.cfg
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libattach.so
@@ -795,7 +814,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnet.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnio.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libnpt.so
+%ifnarch x32
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsaproc.so
+%endif
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsctp.so
 %{?with_sunec:%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsunec.so}
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libunpack.so
