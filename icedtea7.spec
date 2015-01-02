@@ -424,10 +424,10 @@ cp -p %{PATCH100} pld-patches
 cp -p %{PATCH101} pld-patches
 cp -p %{PATCH102} pld-patches
 cp -p %{PATCH103} pld-patches
-cp -p %{PATCH104} pld-patches
 %ifarch x32
-cp -p %{PATCH105} pld-patches
+cp -p %{PATCH104} pld-patches
 %endif
+cp -p %{PATCH105} pld-patches
 
 # let the build system extract the sources where it wants them
 install -d drops
