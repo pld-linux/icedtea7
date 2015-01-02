@@ -8,6 +8,9 @@
 # TODO:
 # - install .ttf fonts (same as in sun-java-base-jre-X11 package) or configure
 #   it to use system fonts (is it possible?).
+# - desktop files, icons, etc. Some of these are included in the source root dir
+# - maybe build Shark VM, at least on i486, as the zero-assembly VM is very slow
+# - pass %{rpmcflags} to build
 
 %bcond_with bootstrap   # build a bootstrap version, using icedtea6
 %bcond_without nss	# don't use NSS
