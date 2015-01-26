@@ -1,0 +1,23 @@
+Version: 2.5.4
+
+icedtea7-bug-2123.patch, icedtea7-bug-2135.patch applied upstream.
+
+Security fixes:
+
+    S8046656: Update protocol support
+    S8047125, CVE-2015-0395: (ref) More phantom object references
+    S8047130: Fewer escapes from escape analysis
+    S8048035, CVE-2015-0400: Ensure proper proxy protocols
+    S8049253: Better GC validation
+    S8050807, CVE-2015-0383: Better performing performance data handling
+    S8054367, CVE-2015-0412: More references for endpoints
+    S8055304, CVE-2015-0407: More boxing for DirectoryComboBoxModel
+    S8055309, CVE-2015-0408: RMI needs better transportation considerations
+    S8055479: TLAB stability
+    S8055489, CVE-2014-6585: Better substitution formats
+    S8056264, CVE-2014-6587: Multicast support improvements
+    S8056276, CVE-2014-6591: Fontmanager feature improvements
+    S8057555, CVE-2014-6593: Less cryptic cipher suite management
+    S8058982, CVE-2014-6601: Better verification of an exceptional invokespecial
+    S8059485, CVE-2015-0410: Resolve parsing ambiguity
+    S8061210, CVE-2014-3566: Issues in TLS
