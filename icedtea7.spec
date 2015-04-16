@@ -31,34 +31,32 @@
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
-Version:	2.5.4
-Release:	2
+Version:	2.5.5
+Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
-# Source0-md5:	646064d7a8d57c2cae0ef35a05de57c8
+# Source0-md5:	2b639a72a976c0cdc743ab5e18bd2369
 Source1:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/openjdk.tar.bz2
-# Source1-md5:	90c83c73214a083b24adfee9a1be56a4
+# Source1-md5:	6edc6aa04cb261ebc382d53e7072d946
 Source2:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/corba.tar.bz2
-# Source2-md5:	06235b1e4b024402d6ec5cf0672cc353
+# Source2-md5:	999fa486ab1eaddaba220c19d24d1b33
 Source3:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jaxp.tar.bz2
-# Source3-md5:	d3ffad8f8b415f002fd0f308279accbc
+# Source3-md5:	139a569cf9d78ae7354fd407750a6fe2
 Source4:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jaxws.tar.bz2
-# Source4-md5:	03bb3aa6f03765816adf3d312feed05e
+# Source4-md5:	7bc5e8735d9db574caf1c658d248f69a
 Source5:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jdk.tar.bz2
-# Source5-md5:	4e848b426d98b60523f71e9f35edfff8
+# Source5-md5:	81ee4210f1c4315af9069f8153a8e7a1
 Source6:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/langtools.tar.bz2
-# Source6-md5:	ffc690fecd801662d4b4f8874aecbc68
+# Source6-md5:	117ae9e846a00e287060035b930c299d
 Source7:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/hotspot.tar.bz2
-# Source7-md5:	c3bbd2ff7bf67eae93f9c55ad3ff3b91
+# Source7-md5:	51b6547c4a27c4cf6a134dca0f59e3ae
 Source10:	make-cacerts.sh
 # 0-99 patches for the IcedTea files
 Patch0:		%{name}-x32-ac.patch
 # 100-... patches applied to the extracted sources
 Patch100:	%{name}-libpath.patch
-Patch101:	%{name}-giflib.patch
-Patch102:	%{name}-x32.patch
-Patch103:	currency-change-fix.patch
+Patch101:	%{name}-x32.patch
 URL:		http://icedtea.classpath.org/wiki/Main_Page
 BuildRequires:	alsa-lib-devel
 BuildRequires:	ant
@@ -427,11 +425,9 @@ Przykłady dla OpenJDK.
 # patches to applied to the extracted sources
 install -d pld-patches
 cp -p %{PATCH100} pld-patches
-cp -p %{PATCH101} pld-patches
 %ifarch x32
-cp -p %{PATCH102} pld-patches
+cp -p %{PATCH101} pld-patches
 %endif
-cp -p %{PATCH103} pld-patches
 
 # let the build system extract the sources where it wants them
 install -d drops
