@@ -26,31 +26,31 @@
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 51.0
 # JDK/JRE version, as returned with `java -version`, '_' replaced with '.'
-%define		_jdkversion 1.7.0.65
+%define		_jdkversion 1.7.0.85
 
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
-Version:	2.5.5
+Version:	2.6.1
 Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
-# Source0-md5:	2b639a72a976c0cdc743ab5e18bd2369
+# Source0-md5:	efac44117a94b9d3278988959e336e05
 Source1:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/openjdk.tar.bz2
-# Source1-md5:	6edc6aa04cb261ebc382d53e7072d946
+# Source1-md5:	d330560d5e9f443aa0e26130ca111a3f
 Source2:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/corba.tar.bz2
-# Source2-md5:	999fa486ab1eaddaba220c19d24d1b33
+# Source2-md5:	0de3ec4198c437e3cbc58420c65146e1
 Source3:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jaxp.tar.bz2
-# Source3-md5:	139a569cf9d78ae7354fd407750a6fe2
+# Source3-md5:	8fa2bf64a4c27fea33f5fa60df6bcce6
 Source4:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jaxws.tar.bz2
-# Source4-md5:	7bc5e8735d9db574caf1c658d248f69a
+# Source4-md5:	ebb952f8d77498fd8e5f0a1f27e2a6a2
 Source5:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jdk.tar.bz2
-# Source5-md5:	81ee4210f1c4315af9069f8153a8e7a1
+# Source5-md5:	e242c40b5d7f4cfa52a0071c2836ba34
 Source6:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/langtools.tar.bz2
-# Source6-md5:	117ae9e846a00e287060035b930c299d
+# Source6-md5:	1bf69ee4265e49516283aa9126ceb80d
 Source7:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/hotspot.tar.bz2
-# Source7-md5:	51b6547c4a27c4cf6a134dca0f59e3ae
+# Source7-md5:	1a2fae086d50fc1ad69b72b4cf5baa3a
 Source10:	make-cacerts.sh
 # 0-99 patches for the IcedTea files
 Patch0:		%{name}-x32-ac.patch
@@ -82,6 +82,7 @@ BuildRequires:	libffi-devel
 BuildRequires:	libgcj
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
+BuildRequires:	libsctp-devel
 BuildRequires:	libstdc++-static
 BuildRequires:	lsb-release
 %{?with_nss:BuildRequires:	nss-devel >= 1:3.17.2-5}
@@ -808,6 +809,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjava.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjavajpeg.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjavalcms.so
+%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjavasctp.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjava_crw_demo.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjawt.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libjdwp.so
@@ -823,7 +825,6 @@ rm -rf $RPM_BUILD_ROOT
 %ifnarch x32
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsaproc.so
 %endif
-%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsctp.so
 %{?with_sunec:%attr(755,root,root) %{jredir}/lib/%{jre_arch}/libsunec.so}
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libunpack.so
 %attr(755,root,root) %{jredir}/lib/%{jre_arch}/libverify.so
