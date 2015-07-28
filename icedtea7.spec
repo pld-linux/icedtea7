@@ -81,6 +81,7 @@ BuildRequires:	libffi-devel
 # for /usr/share/java/ecj.jar:
 BuildRequires:	libgcj
 BuildRequires:	libjpeg-devel
+BuildRequires:	pcsc-lite-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libsctp-devel
 BuildRequires:	libstdc++-static
