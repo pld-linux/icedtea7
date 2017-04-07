@@ -26,31 +26,31 @@
 # class data version seen with file(1) that this jvm is able to load
 %define		_classdataversion 51.0
 # JDK/JRE version, as returned with `java -version`, '_' replaced with '.'
-%define		_jdkversion 1.7.0.85
+%define		_jdkversion 1.7.0.131
 
 Summary:	OpenJDK and GNU Classpath code
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath
 Name:		icedtea7
-Version:	2.6.6
+Version:	2.6.9
 Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	http://icedtea.wildebeest.org/download/source/icedtea-%{version}.tar.gz
-# Source0-md5:	a688ccbc949c983016ebbc763e7bb1c0
+# Source0-md5:	496946b03b43fbbdd23214a1f67049d5
 Source1:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/openjdk.tar.bz2
-# Source1-md5:	457590e39a27894c3e0b95fb38e46703
+# Source1-md5:	9433581dd17497640a91e4a057b4191b
 Source2:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/corba.tar.bz2
-# Source2-md5:	a60e2e11756d814c0b6279a7c09f2fe4
+# Source2-md5:	7b2603c35e5f2c1061b4e78d1f2978f5
 Source3:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jaxp.tar.bz2
-# Source3-md5:	4e2604404efa37ba94bc906391ab40b3
+# Source3-md5:	52517bbbf2437db32f5d004076cefb44
 Source4:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jaxws.tar.bz2
-# Source4-md5:	6b67facacec9c1f0ffe40f42b55f40bc
+# Source4-md5:	e32f0dd84f5ec5563da6d5e90a11a4a4
 Source5:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/jdk.tar.bz2
-# Source5-md5:	8635363b90b5d5ef36efe0ab462f7f54
+# Source5-md5:	e122ed50519da1845fa11e0f90bc7964
 Source6:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/langtools.tar.bz2
-# Source6-md5:	24ba6a4cea0108dbbdf64731cebbbb20
+# Source6-md5:	748f8d95386b186a50a59233ba5a4680
 Source7:	http://icedtea.wildebeest.org/download/drops/icedtea7/%{version}/hotspot.tar.bz2
-# Source7-md5:	b9a09fa5869aa9ece5650a62c933f64a
+# Source7-md5:	85adb8ae4427318d5e6af7e0bdde2e5c
 Source10:	make-cacerts.sh
 # 0-99 patches for the IcedTea files
 Patch0:		%{name}-x32-ac.patch
@@ -466,6 +466,9 @@ exec java \
 	"$@"
 EOF
 chmod a+x build-bin/ant
+
+export EXTRA_CFLAGS="-std=gnu++98 -Wno-error -fno-delete-null-pointer-checks -fno-lifetime-dse"
+export EXTRA_CPP_FLAGS="-std=gnu++98 -fno-delete-null-pointer-checks -fno-lifetime-dse"
 
 %{__aclocal}
 %{__autoconf}
