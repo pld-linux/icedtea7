@@ -395,9 +395,7 @@ i został zbudowany wyłącznie przy użyciu wolnego oprogramowania.
 Summary:	OpenJDK and GNU Classpath code - sources
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath - kod źródłowy
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description jdk-sources
 Source code for the OpenJDK development kit and Java standard library.
@@ -410,9 +408,7 @@ biblioteki Javy.
 Summary:	OpenJDK and GNU Classpath code - examples
 Summary(pl.UTF-8):	Kod OpenJDK i GNU Classpath - przykłady
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description examples
 Code examples for OpenJDK.
